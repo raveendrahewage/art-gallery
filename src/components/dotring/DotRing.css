@@ -10,7 +10,7 @@
   background-size: auto;
   background-image: url(../../assets/paint-brush.svg);
   transform: translate(-30%, -70%);
-  z-index: 999;
+  z-index: 2147483647;
   pointer-events: none;
 }
 
@@ -26,6 +26,6 @@
   background-size: auto;
   background-image: url(../../assets/paint-plate.svg);
   transform: translate(-50%, -50%);
-  z-index: 999;
+  z-index: 2147483647;
   pointer-events: none;
 }

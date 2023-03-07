@@ -13,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.onscroll = () => stickyNav();
-    return ()=> window.removeEventListener("scroll", stickyNav)
+    return () => window.removeEventListener("scroll", stickyNav)
   }, []);
 
   const links: Link[] = [
@@ -43,7 +43,7 @@ const Navbar = () => {
     <nav ref={navbar} className={`navbar ${sticky ? "sticky" : ""}`}>
       <div className="brand-and-toggler">
         <a href="/#" className="navbar-brand">
-          ASHU
+          RV
         </a>
         <button
           onClick={() => setShowNav(true)}

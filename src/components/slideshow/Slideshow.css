@@ -1,0 +1,56 @@
+.slideshow {
+    height: 100vh;
+}
+
+.showcase {
+    min-width: 100%;
+    color: #fff;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    text-align: center;
+}
+
+.showcase h1 {
+    font-size: 5rem;
+    width: 90%;
+    margin: 1.5rem auto;
+}
+
+.showcase a {
+    background: transparent;
+    border: 2.5px solid #fff;
+    color: #fff;
+    font-family: inherit;
+    text-transform: uppercase;
+    padding: 0.8rem 1.4rem;
+    outline: 0;
+    transition: all 0.5s ease;
+    text-decoration: none;
+}
+
+.showcase a:hover {
+    background: #fff;
+    color: #000;
+}
+
+.react-slideshow-container .default-nav {
+    height: 75px;
+    width: 75px;
+}
+
+@media screen and (max-width: 400px) {
+    .showcase h1 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .showcase h1 {
+        font-size: 1.8rem;
+    }
+
+    .showcase a {
+        font-size: 1.05rem;
+    }
+}

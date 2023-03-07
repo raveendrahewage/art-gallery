@@ -14,8 +14,8 @@ const Banner = () => {
       className="aspect-[2/1] banner"
     >
       <div className="headline">
-        <p className="first-name">ASHENI</p>
-        <p className="last-name">JAYANGANI</p>
+        <p className="first-name">RAVEENDRA</p>
+        <p className="last-name">HEWAGE</p>
       </div>
     </ParallaxBanner>
   );
