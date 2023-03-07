@@ -21,4 +21,9 @@ type SettingsProps = {
     width: number;
 };
 
-export type { Image, Link, SettingsProps }
+type Category = {
+    id:number;
+    name: string;
+}
+
+export type { Image, Link, SettingsProps, Category };
