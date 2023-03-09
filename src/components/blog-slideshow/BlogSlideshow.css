@@ -1,8 +1,8 @@
-.slideshow {
-    height: 100vh;
+.blog-slideshow {
+    height: 100%;
 }
 
-.showcase {
+.blog-showcase {
     min-width: 100%;
     color: #fff;
     display: grid;
@@ -11,14 +11,13 @@
     text-align: center;
 }
 
-.showcase h1 {
+.blog-showcase h1 {
     font-size: 5rem;
     width: 90%;
     margin: 1.5rem auto;
-    text-transform: uppercase;
 }
 
-.showcase a {
+.blog-showcase a {
     background: transparent;
     border: 2.5px solid #fff;
     color: #fff;
@@ -30,34 +29,37 @@
     text-decoration: none;
 }
 
-.showcase a:hover {
+.blog-showcase a:hover {
     background: #fff;
     color: #000;
 }
 
-.react-slideshow-container .default-nav {
-    height: 75px;
-    width: 75px;
+.blog-slideshow .react-slideshow-container .default-nav {
+    height: 50px;
+    width: 50px;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    fill: white;
     transition: all 0.5s ease;
 }
 
-@media screen and (max-width: 400px) {
-    .showcase h1 {
-        font-size: 4rem;
-    }
+.blog-slideshow .react-slideshow-container .default-nav:hover {
+    background-color: white;
+    fill: rgba(0, 0, 0, 0.8);
+}
 
-    .react-slideshow-container .default-nav {
-        height: 40px;
-        width: 40px;
+@media screen and (max-width: 400px) {
+    .blog-showcase h1 {
+        font-size: 4rem;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .showcase h1 {
+    .blog-showcase h1 {
         font-size: 1.8rem;
     }
 
-    .showcase a {
+    .blog-showcase a {
         font-size: 1.05rem;
     }
 }

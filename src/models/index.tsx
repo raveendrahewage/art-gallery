@@ -1,9 +1,7 @@
-import { LayoutType, Photo } from "react-photo-album";
-
 type Image = {
-    url: string;
-    description: string;
-    info: string
+    src: string;
+    width: number;
+    height: number;
 }
 
 type Link = {
@@ -11,19 +9,55 @@ type Link = {
     name: string;
 }
 
-type SettingsProps = {
-    photos: Photo[];
-    layout: LayoutType;
-    targetRowHeight: number;
-    columns: number;
-    spacing: number;
-    padding: number;
-    width: number;
-};
-
 type Category = {
-    id:number;
+    id: number;
     name: string;
 }
 
-export type { Image, Link, SettingsProps, Category };
+type Slide = {
+    src: string;
+    width: number;
+    height: number;
+    categoryId: number;
+    title: string;
+    description: string;
+    // srcSet: Image[];
+}
+
+type Photo = {
+    src: string;
+    width: number;
+    height: number;
+    categoryId: number;
+    // images: Image[];
+}
+
+type SlideshowImage = {
+    id: string;
+    url: string;
+    caption: string;
+}
+
+type BlogArticleProps = {
+    slideImages: SlideshowImage[];
+    isSlideShowLeft: boolean;
+}
+
+type BlogSlideshowProps = {
+    slideImages: SlideshowImage[]
+}
+
+type BlogProps = {
+    viewPortSize: number
+}
+
+type PortfolioProps = {
+    viewPortSize: number
+}
+
+type NavbarProps = {
+    pageYOffset: number
+}
+
+
+export type { Image, Link, Category, Slide, Photo, SlideshowImage, BlogArticleProps, BlogSlideshowProps, BlogProps, PortfolioProps, NavbarProps };

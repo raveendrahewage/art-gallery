@@ -1,20 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "../../models";
+import { NavbarProps } from "../../models";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = (props: NavbarProps) => {
   const navbar = useRef<HTMLDivElement>(null);
   const [sticky, setSticky] = useState<boolean>(false);
   const [showNav, setShowNav] = useState<boolean>(false);
 
-  const stickyNav = (): void => {
-    setSticky(window.pageYOffset > Number(navbar.current?.offsetTop));
-  };
-
   useEffect(() => {
-    window.onscroll = () => stickyNav();
-    return () => window.removeEventListener("scroll", stickyNav)
-  }, []);
+    setSticky(props.pageYOffset > Number(navbar.current?.offsetTop));
+  }, [props.pageYOffset]);
 
   const links: Link[] = [
     {

@@ -6,14 +6,14 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
+import photos from "./photos";
+import { Category, Slide, Photo, PortfolioProps } from "../../models";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "./Portfolio.css";
-import photos from "./photos";
-import { Category } from "../../models";
 
-const Portfolio = () => {
+const Portfolio = (props: PortfolioProps) => {
   const [layout, setLayout] = useState<LayoutType>("masonry");
   const [targetRowHeight, setTargetRowHeight] = useState(300);
   const [columns, setColumns] = useState<number>(5);
@@ -21,7 +21,7 @@ const Portfolio = () => {
   // const [padding, setPadding] = useState<number>(10);
   const [index, setIndex] = useState<number>(-1);
   const [categoryId, setCategoryId] = useState<number>(0);
-  const [photoList, setPhotoList] = useState(photos);
+  const [photoList, setPhotoList] = useState<Photo[]>(photos);
 
   const categories: Category[] = [
     {
@@ -48,49 +48,44 @@ const Portfolio = () => {
 
   const filterCategory = (id: number) => {
     setCategoryId(id);
-    console.log(photos);
     setPhotoList(
       id === 0 ? photos : photos.filter((img) => img.categoryId === id)
     );
   };
-
-  const layoutChange = () => {
-    const viewportSize = window.innerWidth;
-    setLayout(viewportSize < 480 ? "columns" : "masonry");
-    setColumns(viewportSize < 480 ? 1 : viewportSize < 900 ? 3 : 4);
-    setSpacing(viewportSize < 480 ? 10 : viewportSize < 900 ? 20 : 30);
+  const layoutChange = (viewPortSize: number = window.innerWidth) => {
+    setLayout(viewPortSize < 480 ? "columns" : "masonry");
+    setColumns(viewPortSize < 480 ? 1 : viewPortSize < 900 ? 3 : 4);
+    setSpacing(viewPortSize < 480 ? 10 : viewPortSize < 900 ? 20 : 30);
     // setPadding(viewportSize < 480 ? 5 : viewportSize < 900 ? 10 : 10);
     setTargetRowHeight(
-      viewportSize < 480 ? 100 : viewportSize < 900 ? 500 : 300
+      viewPortSize < 480 ? 100 : viewPortSize < 900 ? 500 : 300
     );
-  };
+  }
 
   useEffect(() => {
-    layoutChange();
-    window.onresize = () => layoutChange();
-    return () => window.removeEventListener("resize", layoutChange);
-  }, []);
+    layoutChange(props.viewPortSize)
+  }, [props.viewPortSize]);
 
-  const slides = photos.map(
-    ({ src, width, height, images, categoryId }, index: number) => ({
+  const slides: Slide[] = photos.map(
+    ({ src, width, height, categoryId }, index: number) => ({
       src,
       width,
       height,
       categoryId,
       title: "Flamingo_" + index,
       description: "Vicko Mozara\n\nVeliki zali, Dubravica" + index,
-      srcSet: images.map((image) => ({
-        src: image.src,
-        width: image.width,
-        height: image.height,
-      })),
+      // srcSet: images.map((image) => ({
+      //   src: image.src,
+      //   width: image.width,
+      //   height: image.height,
+      // })),
     })
   );
 
   const renderPhoto = useCallback(
     ({
       layout: { index, ...layout },
-      imageProps: { alt, style, ...rest },
+      imageProps: { alt, style, src, ...rest },
     }: RenderPhotoProps) => (
       <div className="frame">
         <div className="inner-frame">
@@ -101,6 +96,7 @@ const Portfolio = () => {
                 ...style,
                 marginBottom: 0,
               }}
+              src={src}
               {...rest}
             />
           </div>
@@ -156,6 +152,9 @@ const Portfolio = () => {
           targetRowHeight={targetRowHeight}
           renderPhoto={renderPhoto}
           onClick={({ index }) => setIndex(index)}
+          componentsProps={(containerWidth) => ({
+            imageProps: { loading: (containerWidth || 0) > 600 ? "eager" : "lazy" },
+          })}
         />
         <Lightbox
           slides={slides}

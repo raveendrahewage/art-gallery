@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.about {
+.blog {
   text-align: center;
   padding: 100px 0;
   background-color: black;
@@ -11,7 +11,7 @@
   width: 100%;
 }
 
-.about sub {
+.blog sub {
   color: white;
   width: 75%;
   display: inline-block;
@@ -40,73 +40,27 @@
   background-position: center center;
 }
 
-.about-section {
-  /* background-color: black; */
+.blog-section {
+  background-color: black;
   padding: 50px;
   font-family: josefin sans, sans-serif;
 }
 
-.about-section-row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.about-section-column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  /* height: 300px; */
-}
-
-.about-section-column img {
-  width: 100%;
-  height: auto;
-}
-
-.about-section-column h3 {
-  /* float: left;
-  margin-bottom: 15px;
-  padding: 0;
-  width: 100%; */
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 40px;
-  color: white;
-}
-
-.about-section-column p {
-  /* float: left;
-  margin-bottom: 50px;
-  width: 100%; */
-  color: white;
-  line-height: 28px;
-}
-
-.second-column {
-  padding: 40px;
-  background-image: url(../../assets/portfolio-bg.jpg);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 @media screen and (max-width: 800px) {
-  .about-section {
+  .blog-section {
     text-align: center;
   }
 
-  .about-section-column {
+  .blog-section-column {
     width: 100%;
   }
 
-  .about-section-row h3 {
+  .blog-section-row h3 {
     font-size: 30px;
     margin-bottom: 10px;
   }
 
-  .about-section-row p {
+  .blog-section-row p {
     margin-bottom: 20px;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Slide } from 'react-slideshow-image';
+import { SlideshowImage } from '../../models';
 import 'react-slideshow-image/dist/styles.css'
 import "./Slideshow.css"
 
@@ -10,7 +11,7 @@ const divStyle = {
     backgroundSize: 'cover',
     height: '100vh'
 }
-const slideImages = [
+const slideImages: SlideshowImage[] = [
     {
         url: 'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
         caption: 'Portfolio',
@@ -23,14 +24,14 @@ const slideImages = [
     },
     {
         url: 'https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-        caption: 'Slide 3',
-        id: ""
+        caption: 'Blog',
+        id: "blog"
     },
 ];
 
 const Slideshow = () => {
     return (
-        <div className="slide-container slideshow">
+        <div className="slideshow">
             <Slide>
                 {slideImages.map((slideImage, index) => (
                     <div key={index}>
