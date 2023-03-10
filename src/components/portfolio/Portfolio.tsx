@@ -7,7 +7,7 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import photos from "./photos";
-import { Category, Slide, Photo, PortfolioProps } from "../../models";
+import { Slide, Photo, PortfolioProps } from "../../models";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -20,36 +20,20 @@ const Portfolio = (props: PortfolioProps) => {
   const [spacing, setSpacing] = useState<number>(30);
   // const [padding, setPadding] = useState<number>(10);
   const [index, setIndex] = useState<number>(-1);
-  const [categoryId, setCategoryId] = useState<number>(0);
+  const [category, setCategory] = useState<string>("all");
   const [photoList, setPhotoList] = useState<Photo[]>(photos);
 
-  const categories: Category[] = [
-    {
-      id: 0,
-      name: "ALL",
-    },
-    {
-      id: 1,
-      name: "Cat 1",
-    },
-    {
-      id: 2,
-      name: "Cat 2",
-    },
-    {
-      id: 3,
-      name: "Cat 3",
-    },
-    {
-      id: 4,
-      name: "Cat 4",
-    },
+  const categories: string[] = [
+    "all",
+    ...new Set(photos.map((photo: Photo) => photo.category)),
   ];
 
-  const filterCategory = (id: number) => {
-    setCategoryId(id);
+  const filterCategory = (category: string) => {
+    setCategory(category);
     setPhotoList(
-      id === 0 ? photos : photos.filter((img) => img.categoryId === id)
+      category === "all"
+        ? photos
+        : photos.filter((img) => img.category === category)
     );
   };
   const layoutChange = (viewPortSize: number = window.innerWidth) => {
@@ -60,18 +44,18 @@ const Portfolio = (props: PortfolioProps) => {
     setTargetRowHeight(
       viewPortSize < 480 ? 100 : viewPortSize < 900 ? 500 : 300
     );
-  }
+  };
 
   useEffect(() => {
-    layoutChange(props.viewPortSize)
+    layoutChange(props.viewPortSize);
   }, [props.viewPortSize]);
 
   const slides: Slide[] = photos.map(
-    ({ src, width, height, categoryId }, index: number) => ({
+    ({ src, width, height, category }, index: number) => ({
       src,
       width,
       height,
-      categoryId,
+      category,
       title: "Flamingo_" + index,
       description: "Vicko Mozara\n\nVeliki zali, Dubravica" + index,
       // srcSet: images.map((image) => ({
@@ -95,6 +79,9 @@ const Portfolio = (props: PortfolioProps) => {
               style={{
                 ...style,
                 marginBottom: 0,
+                maxWidth: "100%",
+                height: "auto",
+                aspectRatio: "unset",
               }}
               src={src}
               {...rest}
@@ -103,7 +90,13 @@ const Portfolio = (props: PortfolioProps) => {
           <div className="middle" onClick={() => setIndex(index)}>
             <div className="row">
               <div className="column1">
-                <svg className="camera" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z" /></svg>
+                <svg
+                  className="camera"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z" />
+                </svg>
                 <div className="index">{index + 1}</div>
               </div>
               <div className="column2">
@@ -127,13 +120,13 @@ const Portfolio = (props: PortfolioProps) => {
         </sub>
         <div className="btn-group">
           <div>
-            {categories.map((category: Category) => (
+            {categories.map((cat: string, index: number) => (
               <div
-                key={category.id}
-                className={category.id === categoryId ? "div-active" : ""}
-                onClick={() => filterCategory(category.id)}
+                key={index}
+                className={cat === category ? "div-active" : ""}
+                onClick={() => filterCategory(cat)}
               >
-                {category.name}
+                {cat}
                 <span></span>
                 <span></span>
                 <span></span>
@@ -153,7 +146,9 @@ const Portfolio = (props: PortfolioProps) => {
           renderPhoto={renderPhoto}
           onClick={({ index }) => setIndex(index)}
           componentsProps={(containerWidth) => ({
-            imageProps: { loading: (containerWidth || 0) > 600 ? "eager" : "lazy" },
+            imageProps: {
+              loading: (containerWidth || 0) > 600 ? "eager" : "lazy",
+            },
           })}
         />
         <Lightbox

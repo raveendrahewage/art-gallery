@@ -200,9 +200,10 @@
   color: var(--c);
   font-size: 16px;
   border: 0.2em solid var(--c);
-  width: 7em;
-  height: 3em;
+  /* width: 7em; */
+  /* height: 3em; */
   text-transform: uppercase;
+  padding: 0px 10px;
   font-weight: bold;
   font-family: sans-serif;
   letter-spacing: 0.1em;

@@ -4,13 +4,15 @@ type Image = {
   height: number;
 };
 
-type Link = {
-  url: string;
-  name: string;
+type CategoryPhoto = {
+  category: string;
+  img: string;
+  width: number;
+  height: number;
 };
 
-type Category = {
-  id: number;
+type Link = {
+  url: string;
   name: string;
 };
 
@@ -18,7 +20,7 @@ type Slide = {
   src: string;
   width: number;
   height: number;
-  categoryId: number;
+  category: string;
   title: string;
   description: string;
   // srcSet: Image[];
@@ -28,7 +30,7 @@ type Photo = {
   src: string;
   width: number;
   height: number;
-  categoryId: number;
+  category: string;
   // images: Image[];
 };
 
@@ -66,10 +68,10 @@ type BannerProps = {
 export type {
   Image,
   Link,
-  Category,
   Slide,
   Photo,
   SlideshowImage,
+  CategoryPhoto,
   BlogArticleProps,
   BlogSlideshowProps,
   BlogProps,
