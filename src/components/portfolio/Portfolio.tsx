@@ -6,8 +6,12 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
-import photos from "./photos";
 import { Slide, Photo, PortfolioProps } from "../../models";
+import {
+  portfolioPhotos,
+  categories,
+  portfolioSlides,
+} from "../../assets/portfolio";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -18,29 +22,40 @@ const Portfolio = (props: PortfolioProps) => {
   const [targetRowHeight, setTargetRowHeight] = useState(300);
   const [columns, setColumns] = useState<number>(5);
   const [spacing, setSpacing] = useState<number>(30);
-  // const [padding, setPadding] = useState<number>(10);
   const [index, setIndex] = useState<number>(-1);
+  const [displayeImageCount, setDisplayeImageCount] = useState<number>(10);
   const [category, setCategory] = useState<string>("all");
-  const [photoList, setPhotoList] = useState<Photo[]>(photos);
+  const [slides, setSlides] = useState<Slide[]>(portfolioSlides);
+  const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
 
-  const categories: string[] = [
-    "all",
-    ...new Set(photos.map((photo: Photo) => photo.category)),
-  ];
+  useEffect(() => {
+    const getCategoryPhotos = (category: string): Photo[] =>
+      portfolioPhotos.filter((img: Photo) => img.category === category);
 
-  const filterCategory = (category: string) => {
-    setCategory(category);
-    setPhotoList(
-      category === "all"
-        ? photos
-        : photos.filter((img) => img.category === category)
+    const getSlides = (photo: Photo[]) =>
+      photo.map(({ src, width, height, category }, index: number) => ({
+        src,
+        width,
+        height,
+        category,
+        title: "Flamingo_" + index,
+        description: "Vicko Mozara\n\nVeliki zali, Dubravica" + index,
+      }));
+
+    setFilteredPhotos(
+      category === "all" ? portfolioPhotos : getCategoryPhotos(category)
     );
-  };
+    setSlides(
+      category === "all"
+        ? getSlides(portfolioPhotos)
+        : getSlides(getCategoryPhotos(category))
+    );
+  }, [category]);
+
   const layoutChange = (viewPortSize: number = window.innerWidth) => {
     setLayout(viewPortSize < 480 ? "columns" : "masonry");
     setColumns(viewPortSize < 480 ? 1 : viewPortSize < 900 ? 3 : 4);
     setSpacing(viewPortSize < 480 ? 10 : viewPortSize < 900 ? 20 : 30);
-    // setPadding(viewportSize < 480 ? 5 : viewportSize < 900 ? 10 : 10);
     setTargetRowHeight(
       viewPortSize < 480 ? 100 : viewPortSize < 900 ? 500 : 300
     );
@@ -50,28 +65,17 @@ const Portfolio = (props: PortfolioProps) => {
     layoutChange(props.viewPortSize);
   }, [props.viewPortSize]);
 
-  const slides: Slide[] = photos.map(
-    ({ src, width, height, category }, index: number) => ({
-      src,
-      width,
-      height,
-      category,
-      title: "Flamingo_" + index,
-      description: "Vicko Mozara\n\nVeliki zali, Dubravica" + index,
-      // srcSet: images.map((image) => ({
-      //   src: image.src,
-      //   width: image.width,
-      //   height: image.height,
-      // })),
-    })
-  );
-
   const renderPhoto = useCallback(
     ({
       layout: { index, ...layout },
       imageProps: { alt, style, src, ...rest },
     }: RenderPhotoProps) => (
-      <div className="frame">
+      <div
+        className="frame"
+        style={{
+          display: index < displayeImageCount ? "block" : "none",
+        }}
+      >
         <div className="inner-frame">
           <div className="border">
             <img
@@ -108,7 +112,7 @@ const Portfolio = (props: PortfolioProps) => {
         </div>
       </div>
     ),
-    [slides]
+    [displayeImageCount, slides]
   );
 
   return (
@@ -124,7 +128,10 @@ const Portfolio = (props: PortfolioProps) => {
               <div
                 key={index}
                 className={cat === category ? "div-active" : ""}
-                onClick={() => filterCategory(cat)}
+                onClick={() => {
+                  setCategory(cat);
+                  setDisplayeImageCount(10);
+                }}
               >
                 {cat}
                 <span></span>
@@ -138,7 +145,7 @@ const Portfolio = (props: PortfolioProps) => {
       </div>
       <div className="container">
         <PhotoAlbum
-          photos={photoList}
+          photos={filteredPhotos}
           layout={layout}
           columns={columns}
           spacing={spacing}
@@ -158,6 +165,25 @@ const Portfolio = (props: PortfolioProps) => {
           close={() => setIndex(-1)}
           plugins={[Fullscreen, Slideshow, Thumbnails, Zoom, Captions]}
         />
+        {displayeImageCount < filteredPhotos.length && (
+          <div className="load-more-btn-container">
+            <div
+              onClick={() =>
+                setDisplayeImageCount(
+                  displayeImageCount + 10 < filteredPhotos.length
+                    ? displayeImageCount + 10
+                    : filteredPhotos.length
+                )
+              }
+            >
+              Load More
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

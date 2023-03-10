@@ -6,7 +6,7 @@ type Image = {
 
 type CategoryPhoto = {
   category: string;
-  img: string;
+  src: string;
   width: number;
   height: number;
 };

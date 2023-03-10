@@ -7,6 +7,26 @@
   background-size: cover;
 }
 
+.load-more-btn-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.load-more-btn {
+  /* width: calc((100% / 3) - 8px); */
+  padding: 16px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+}
+
 .frame {
   border: 15px solid;
   border-bottom-color: #000000;
@@ -195,7 +215,8 @@
   display: inline-block;
 }
 
-.btn-group div div {
+.btn-group div div,
+.load-more-btn-container div {
   --c: #a81c51;
   color: var(--c);
   font-size: 16px;
@@ -217,7 +238,8 @@
   display: inline-block;
 }
 
-.btn-group div div span {
+.btn-group div div span,
+.load-more-btn-container div span {
   position: absolute;
   width: 25%;
   height: 100%;
@@ -230,27 +252,33 @@
   z-index: -1;
 }
 
-.btn-group div div:hover {
+.btn-group div div:hover,
+.load-more-btn-container div:hover {
   color: white;
 }
 
-.btn-group div div:hover span {
+.btn-group div div:hover span,
+.load-more-btn-container div:hover span {
   transform: translateY(0) scale(2);
 }
 
-.btn-group div div span:nth-child(1) {
+.btn-group div div span:nth-child(1),
+.load-more-btn-container div span:nth-child(1) {
   --n: 1;
 }
 
-.btn-group div div span:nth-child(2) {
+.btn-group div div span:nth-child(2),
+.load-more-btn-container div span:nth-child(2) {
   --n: 2;
 }
 
-.btn-group div div span:nth-child(3) {
+.btn-group div div span:nth-child(3),
+.load-more-btn-container div span:nth-child(3) {
   --n: 3;
 }
 
-.btn-group div div span:nth-child(4) {
+.btn-group div div span:nth-child(4),
+.load-more-btn-container div span:nth-child(4) {
   --n: 4;
 }
 
