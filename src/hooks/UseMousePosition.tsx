@@ -15,10 +15,14 @@ const useMousePosition = () => {
   useEffect(() => {
     document.addEventListener("mousemove", mouseMoveHandler);
     document.addEventListener("touchmove", touchMove);
+    document.addEventListener("touchstart", touchMove);
+    document.addEventListener("touchend", touchMove);
 
     return () => {
       document.removeEventListener("mousemove", mouseMoveHandler);
       document.removeEventListener("touchmove", touchMove);
+      document.removeEventListener("touchstart", touchMove);
+      document.removeEventListener("touchend", touchMove);
     };
   }, []);
 
