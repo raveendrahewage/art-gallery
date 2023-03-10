@@ -41,12 +41,12 @@ type SlideshowImage = {
 };
 
 type BlogArticleProps = {
-  slideImages: SlideshowImage[];
+  slideImages: Photo[];
   isSlideShowLeft: boolean;
 };
 
 type BlogSlideshowProps = {
-  slideImages: SlideshowImage[];
+  slideImages: Photo[];
 };
 
 type BlogProps = {
