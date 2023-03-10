@@ -1,54 +1,54 @@
 .blog-section-row {
-    background-image: url(../../assets/portfolio-bg.jpg);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(../../assets/portfolio-bg.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .blog-section-row:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .blog-section-column {
-    float: left;
-    width: 50%;
+  float: left;
+  width: 50%;
 }
 
 .blog-section-column h3 {
-    margin: 0;
-    text-transform: uppercase;
-    font-size: 40px;
-    color: white;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 40px;
+  color: white;
 }
 
 .blog-section-column p {
-    color: white;
-    line-height: 28px;
-    font-family: 'PT Sans Narrow', sans-serif;
+  color: white;
+  line-height: 28px;
+  font-family: "PT Sans Narrow", sans-serif;
 }
 
 .slideshow-column {
-    min-height: 350px;
+  min-height: 350px;
 }
 
 .description-column {
-    padding: 30px;
+  padding: 30px;
 }
 
 @media screen and (max-width: 800px) {
-    .blog-section-column {
-        width: 100%;
-    }
+  .blog-section-column {
+    width: 100%;
+  }
 
-    .blog-section-row h3 {
-        font-size: 30px;
-        margin-bottom: 10px;
-    }
+  .blog-section-row h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
 
-    .blog-section-row p {
-        margin-bottom: 20px;
-    }
+  .blog-section-row p {
+    margin-bottom: 20px;
+  }
 }

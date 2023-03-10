@@ -25,18 +25,18 @@ const App = () => {
     window.onscroll = () => pageYOffsetChange();
     window.onresize = () => viewPortChange();
     return () => {
-      window.removeEventListener("scroll", pageYOffsetChange)
+      window.removeEventListener("scroll", pageYOffsetChange);
       window.removeEventListener("resize", viewPortChange);
-    }
+    };
   }, []);
 
   return (
     <div className="App">
       <DotRing />
       <Navbar pageYOffset={pageYOffset} />
-      <Slideshow />
-      {/* <Banner /> */}
+      <Banner pageYOffset={pageYOffset} />
       <Portfolio viewPortSize={viewPortSize} />
+      <Slideshow />
       <Blog viewPortSize={viewPortSize} />
       <About />
       <Footer />

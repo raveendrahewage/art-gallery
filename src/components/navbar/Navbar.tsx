@@ -39,7 +39,7 @@ const Navbar = (props: NavbarProps) => {
     <nav ref={navbar} className={`navbar ${sticky ? "sticky" : ""}`}>
       <div className="brand-and-toggler">
         <a href="/#" className="navbar-brand">
-          RV
+          ASHU
         </a>
         <button
           onClick={() => setShowNav(true)}
