@@ -10,6 +10,7 @@ import {
   nostalagicPhotos,
   pencilPhotos,
 } from "../../assets/portfolio";
+import Button from "../button/Button";
 import "./Blog.css";
 
 const Blog = (props: BlogProps) => {
@@ -44,13 +45,10 @@ const Blog = (props: BlogProps) => {
           </>
         )}
         <div className="load-more-btn-container">
-          <div onClick={() => setLoadMore(!loadMore)}>
-            {loadMore ? "Show Less" : "Load More"}
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <Button
+            buttonText={loadMore ? "Show Less" : "Load More"}
+            onClick={() => setLoadMore(!loadMore)}
+          />
         </div>
       </div>
     </div>

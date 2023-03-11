@@ -65,6 +65,13 @@ type BannerProps = {
   pageYOffset: number;
 };
 
+type ButtonProps = {
+  key?: number;
+  className?: string;
+  buttonText: string;
+  onClick: () => void;
+};
+
 export type {
   Image,
   Link,
@@ -78,4 +85,5 @@ export type {
   PortfolioProps,
   NavbarProps,
   BannerProps,
+  ButtonProps,
 };

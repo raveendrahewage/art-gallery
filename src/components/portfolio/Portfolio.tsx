@@ -12,6 +12,7 @@ import {
   categories,
   portfolioSlides,
 } from "../../assets/portfolio";
+import Button from "../button/Button";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -126,20 +127,15 @@ const Portfolio = (props: PortfolioProps) => {
         <div className="btn-group">
           <div>
             {categories.map((cat: string, index: number) => (
-              <div
+              <Button
                 key={index}
                 className={cat === category ? "div-active" : ""}
                 onClick={() => {
                   setCategory(cat);
                   setDisplayeImageCount(10);
                 }}
-              >
-                {cat}
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+                buttonText={cat}
+              />
             ))}
           </div>
         </div>
@@ -167,7 +163,12 @@ const Portfolio = (props: PortfolioProps) => {
           plugins={[Fullscreen, Slideshow, Thumbnails, Zoom, Captions]}
         />
         <div className="load-more-btn-container">
-          <div
+          <Button
+            buttonText={
+              displayImageCount === filteredPhotos.length
+                ? "Show Less"
+                : "Load More"
+            }
             onClick={() =>
               setDisplayeImageCount(
                 filteredPhotos.length === displayImageCount
@@ -177,15 +178,7 @@ const Portfolio = (props: PortfolioProps) => {
                   : filteredPhotos.length
               )
             }
-          >
-            {displayImageCount === filteredPhotos.length
-              ? "Show Less"
-              : "Load More"}
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          />
         </div>
       </div>
     </div>

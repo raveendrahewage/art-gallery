@@ -32,12 +32,13 @@ const App = () => {
 
   return (
     <div className="App">
+      <div id="fb-root"></div>
       <DotRing />
       <Navbar pageYOffset={pageYOffset} />
       <Banner pageYOffset={pageYOffset} />
       <Portfolio viewPortSize={viewPortSize} />
-      <Slideshow />
       <Blog viewPortSize={viewPortSize} />
+      <Slideshow />
       <About />
       <Footer />
     </div>
