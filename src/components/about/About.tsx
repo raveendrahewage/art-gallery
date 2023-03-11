@@ -1,6 +1,5 @@
 import React from "react";
 import "./About.css";
-import aboutImg from "../../assets/about.png";
 
 const About = () => {
   return (
@@ -12,11 +11,9 @@ const About = () => {
         </sub>
       </div>
       <div className="about-section">
-        <div className="about-section-row">
-          <div className="about-section-column">
-            <img src={aboutImg} alt="about" />
-          </div>
-          <div className="about-section-column second-column">
+        <div className="col-container">
+          <div className="col about-img-column"></div>
+          <div className="col second-column">
             <h3>A LITTLE INTRO</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

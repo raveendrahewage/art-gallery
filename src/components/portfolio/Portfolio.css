@@ -14,19 +14,6 @@
   width: 100%;
 }
 
-.load-more-btn {
-  /* width: calc((100% / 3) - 8px); */
-  padding: 16px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 200ms ease-in-out;
-  border-radius: 3px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-}
-
 .frame {
   border: 15px solid;
   border-bottom-color: #000000;

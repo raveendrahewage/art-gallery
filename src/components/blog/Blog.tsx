@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogArticle from "../blog-article/BlogArticle";
 import { BlogProps } from "../../models";
 import {
@@ -13,6 +13,7 @@ import {
 import "./Blog.css";
 
 const Blog = (props: BlogProps) => {
+  const [loadMore, setLoadMore] = useState<boolean>(false);
   return (
     <div id="blog">
       <div className="blog">
@@ -32,12 +33,25 @@ const Blog = (props: BlogProps) => {
           slideImages={coffeePhotos}
           isSlideShowLeft={props.viewPortSize < 800}
         />
-        <BlogArticle slideImages={compassPhotos} isSlideShowLeft={true} />
-        <BlogArticle
-          slideImages={nostalagicPhotos}
-          isSlideShowLeft={props.viewPortSize < 800}
-        />
-        <BlogArticle slideImages={pencilPhotos} isSlideShowLeft={true} />
+        {loadMore && (
+          <>
+            <BlogArticle slideImages={compassPhotos} isSlideShowLeft={true} />
+            <BlogArticle
+              slideImages={nostalagicPhotos}
+              isSlideShowLeft={props.viewPortSize < 800}
+            />
+            <BlogArticle slideImages={pencilPhotos} isSlideShowLeft={true} />
+          </>
+        )}
+        <div className="load-more-btn-container">
+          <div onClick={() => setLoadMore(!loadMore)}>
+            {loadMore ? "Show Less" : "Load More"}
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
   );

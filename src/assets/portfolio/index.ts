@@ -6,6 +6,7 @@ import { coffeePhotos } from "./coffee";
 import { compassPhotos } from "./compass";
 import { nostalagicPhotos } from "./nostalagic";
 import { pencilPhotos } from "./pencil";
+
 const portfolioPhotos: Photo[] = [
   ...bookmarkPhotos,
   ...bwPhotos,

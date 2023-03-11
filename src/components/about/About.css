@@ -46,25 +46,31 @@
   font-family: josefin sans, sans-serif;
 }
 
-.about-section-row:after {
-  content: "";
+.col-container {
   display: table;
-  clear: both;
-}
-
-.about-section-column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  /* height: 300px; */
-}
-
-.about-section-column img {
   width: 100%;
-  height: auto;
+  background-color: black;
+}
+.col {
+  display: table-cell;
+  padding: 16px;
+  width: 50%;
 }
 
-.about-section-column h3 {
+.about-img-column {
+  background-image: url(../../assets/ashu/ashu-about.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* border-width: 10px;
+  border-style: solid;
+  border-bottom-color: #a81c51;
+  border-top-color: #f03c81;
+  border-left-color: #f03c81;
+  border-right-color: #a81c51; */
+}
+
+.col h3 {
   /* float: left;
   margin-bottom: 15px;
   padding: 0;
@@ -75,7 +81,7 @@
   color: white;
 }
 
-.about-section-column p {
+.col p {
   /* float: left;
   margin-bottom: 50px;
   width: 100%; */
@@ -97,16 +103,16 @@
     text-align: center;
   }
 
-  .about-section-column {
+  .col {
     width: 100%;
   }
 
-  .about-section-row h3 {
+  .col-container h3 {
     font-size: 30px;
     margin-bottom: 10px;
   }
 
-  .about-section-row p {
+  .col-container p {
     margin-bottom: 20px;
   }
 }
@@ -114,5 +120,15 @@
 @media screen and (max-width: 400px) {
   .title {
     font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 1010px) {
+  .about-img-column {
+    min-height: 400px;
+  }
+  .col {
+    display: block;
+    width: 100%;
   }
 }

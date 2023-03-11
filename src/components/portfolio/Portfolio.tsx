@@ -23,10 +23,11 @@ const Portfolio = (props: PortfolioProps) => {
   const [columns, setColumns] = useState<number>(5);
   const [spacing, setSpacing] = useState<number>(30);
   const [index, setIndex] = useState<number>(-1);
-  const [displayeImageCount, setDisplayeImageCount] = useState<number>(10);
+  const [displayImageCount, setDisplayeImageCount] = useState<number>(10);
   const [category, setCategory] = useState<string>("all");
   const [slides, setSlides] = useState<Slide[]>(portfolioSlides);
-  const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
+  const [filteredPhotos, setFilteredPhotos] =
+    useState<Photo[]>(portfolioPhotos);
 
   useEffect(() => {
     const getCategoryPhotos = (category: string): Photo[] =>
@@ -73,7 +74,7 @@ const Portfolio = (props: PortfolioProps) => {
       <div
         className="frame"
         style={{
-          display: index < displayeImageCount ? "block" : "none",
+          display: index < displayImageCount ? "block" : "none",
         }}
       >
         <div className="inner-frame">
@@ -112,7 +113,7 @@ const Portfolio = (props: PortfolioProps) => {
         </div>
       </div>
     ),
-    [displayeImageCount, slides]
+    [displayImageCount, slides]
   );
 
   return (
@@ -165,25 +166,27 @@ const Portfolio = (props: PortfolioProps) => {
           close={() => setIndex(-1)}
           plugins={[Fullscreen, Slideshow, Thumbnails, Zoom, Captions]}
         />
-        {displayeImageCount < filteredPhotos.length && (
-          <div className="load-more-btn-container">
-            <div
-              onClick={() =>
-                setDisplayeImageCount(
-                  displayeImageCount + 10 < filteredPhotos.length
-                    ? displayeImageCount + 10
-                    : filteredPhotos.length
-                )
-              }
-            >
-              Load More
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+        <div className="load-more-btn-container">
+          <div
+            onClick={() =>
+              setDisplayeImageCount(
+                filteredPhotos.length === displayImageCount
+                  ? 10
+                  : displayImageCount + 10 < filteredPhotos.length
+                  ? displayImageCount + 10
+                  : filteredPhotos.length
+              )
+            }
+          >
+            {displayImageCount === filteredPhotos.length
+              ? "Show Less"
+              : "Load More"}
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
