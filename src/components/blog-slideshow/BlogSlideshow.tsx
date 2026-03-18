@@ -1,33 +1,50 @@
-import React from "react";
-import { Slide } from "react-slideshow-image";
-import { Photo, BlogSlideshowProps } from "../../models";
-import "react-slideshow-image/dist/styles.css";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Photo } from "../../models";
 import "./BlogSlideshow.css";
-// import { Photo } from "react-photo-album";
 
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundSize: "cover",
-  minHeight: "350px",
-  backgroundRepeat: "no-repeat",
-  //   backgroundSize: "100% 100%",
-  backgroundPosition: "center",
+type BlogSlideshowProps = {
+  slideImages: Photo[];
 };
 
-const BlogSlideshow = (props: BlogSlideshowProps) => {
+const BlogSlideshow = ({ slideImages }: BlogSlideshowProps) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % slideImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [slideImages.length]);
+
   return (
-    <div className="blog-slideshow" style={{ height: 200 }}>
-      <Slide>
-        {props.slideImages.map((slideImage: Photo, index: number) => (
-          <div key={index}>
-            <div
-              style={{ ...divStyle, backgroundImage: `url(${slideImage.src})` }}
-            ></div>
-          </div>
+    <div className="custom-slideshow">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="slide-image-wrapper"
+        >
+          <div 
+            className="slide-image"
+            style={{ backgroundImage: `url(${slideImages[index].src})` }}
+          />
+          <div className="slide-overlay"></div>
+        </motion.div>
+      </AnimatePresence>
+      
+      <div className="slide-indicators">
+        {slideImages.map((_, i) => (
+          <div 
+            key={i} 
+            className={`indicator ${i === index ? 'active' : ''}`}
+            onClick={() => setIndex(i)}
+          />
         ))}
-      </Slide>
+      </div>
     </div>
   );
 };

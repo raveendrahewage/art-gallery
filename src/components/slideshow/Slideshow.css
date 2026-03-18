@@ -1,63 +1,158 @@
-.slideshow {
-    height: 100vh;
+.slideshow-section {
+  height: 100vh;
+  min-height: 600px;
+  max-height: 1080px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-dark);
 }
 
-.showcase {
-    min-width: 100%;
-    color: #fff;
-    display: grid;
-    place-content: center;
-    place-items: center;
-    text-align: center;
+.main-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.showcase h1 {
-    font-size: 5rem;
-    width: 90%;
-    margin: 1.5rem auto;
-    text-transform: uppercase;
+.main-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  animation: subtle-pulse 20s infinite alternate;
 }
 
-.showcase a {
-    background: transparent;
-    border: 2.5px solid #fff;
-    color: #fff;
-    font-family: inherit;
-    text-transform: uppercase;
-    padding: 0.8rem 1.4rem;
-    outline: 0;
-    transition: all 0.5s ease;
-    text-decoration: none;
+@keyframes subtle-pulse {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.15); }
 }
 
-.showcase a:hover {
-    background: #fff;
-    color: #000;
+.main-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
 }
 
-.react-slideshow-container .default-nav {
-    height: 75px;
-    width: 75px;
-    transition: all 0.5s ease;
+.main-slide-content {
+  position: relative;
+  z-index: 5;
+  padding: 20px;
+  max-width: 800px;
 }
 
-@media screen and (max-width: 400px) {
-    .showcase h1 {
-        font-size: 4rem;
-    }
-
-    .react-slideshow-container .default-nav {
-        height: 40px;
-        width: 40px;
-    }
+.slide-subtitle {
+  font-size: 0.9rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 20px;
 }
 
-@media screen and (max-width: 800px) {
-    .showcase h1 {
-        font-size: 1.8rem;
-    }
+.slide-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  color: var(--text-main);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
 
-    .showcase a {
-        font-size: 1.05rem;
-    }
+.slide-cta {
+  display: inline-block;
+  padding: 15px 40px;
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-cta:hover {
+  background-color: var(--text-main);
+  color: #000;
+  padding-right: 50px;
+}
+
+.slide-cta .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.slide-cta:hover .arrow {
+    transform: translateX(10px);
+}
+
+.slide-controls {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  z-index: 10;
+}
+
+.slide-dot {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  text-align: right;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  transition: color 0.3s;
+}
+
+.slide-dot.active {
+    color: var(--text-main);
+}
+
+.dot-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.dot-progress {
+    width: 40px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .slide-controls {
+    bottom: 40px;
+    right: 20px;
+    left: 20px;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .slide-dot {
+      align-items: center;
+  }
+  
+  .dot-progress {
+      width: 60px;
+  }
 }

@@ -1,134 +1,102 @@
-* {
-  box-sizing: border-box;
-}
-
-.about {
+.section-header {
   text-align: center;
-  padding: 100px 0;
-  background-color: black;
-  position: relative;
-  /* float: left; */
-  width: 100%;
+  margin-bottom: 80px;
 }
 
-.about sub {
-  color: white;
-  width: 75%;
+.section-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  background-image: url(../../assets/ashu/ashu-about1.jpg);
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s ease;
+}
+
+.about-image-wrapper:hover .about-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--bg-dark), transparent);
+  opacity: 0.4;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: left;
+}
+
+.content-block h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--text-main);
+  letter-spacing: 0.1em;
+  position: relative;
   display: inline-block;
 }
 
-.title {
-  color: white;
-  margin: 0;
-  font-size: 60px;
-  font-family: josefin sans, sans-serif;
-}
-
-.title::before {
-  background: url(../../assets/title-line.png) no-repeat;
-  bottom: -15px;
-  content: "";
-  display: block;
-  float: left;
-  height: 20px;
-  left: 0;
-  top: 200px;
-  margin: 10px auto 0;
+.content-block h3::after {
+  content: '';
   position: absolute;
-  right: 0;
-  width: 100%;
-  background-position: center center;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--accent);
 }
 
-.about-section {
-  background-color: black;
-  padding: 50px;
-  font-family: josefin sans, sans-serif;
+.content-block p {
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 
-.col-container {
-  display: table;
-  width: 100%;
-  background-color: black;
-}
-.col {
-  display: table-cell;
-  padding: 16px;
-  width: 50%;
-}
-
-.about-img-column {
-  background-image: url(../../assets/ashu/ashu-about1.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  /* border-width: 10px;
-  border-style: solid;
-  border-bottom-color: #a81c51;
-  border-top-color: #f03c81;
-  border-left-color: #f03c81;
-  border-right-color: #a81c51; */
-}
-
-.col h3 {
-  /* float: left;
-  margin-bottom: 15px;
-  padding: 0;
-  width: 100%; */
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 40px;
-  color: white;
-}
-
-.col p {
-  /* float: left;
-  margin-bottom: 50px;
-  width: 100%; */
-  color: white;
-  line-height: 28px;
-}
-
-.second-column {
-  padding: 40px;
-  background-image: url(../../assets/portfolio-bg.jpg);
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-@media screen and (max-width: 800px) {
-  .about-section {
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .about-content {
     text-align: center;
   }
-
-  .col {
-    width: 100%;
-  }
-
-  .col-container h3 {
-    font-size: 30px;
-    margin-bottom: 10px;
-  }
-
-  .col-container p {
-    margin-bottom: 20px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .title {
-    font-size: 30px;
-  }
-}
-
-@media only screen and (max-width: 1010px) {
-  .about-img-column {
-    min-height: 400px;
-  }
-  .col {
-    display: block;
-    width: 100%;
+  
+  .content-block h3::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

@@ -1,0 +1,98 @@
+.category-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 40px auto;
+  max-width: 1000px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.dashboard-hero {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.dashboard-hero:hover img {
+  transform: scale(1.05);
+}
+
+.dashboard-content {
+  max-width: 700px;
+}
+
+.category-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  background: linear-gradient(to right, #fff, #a81c51);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.category-stats {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 25px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.category-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.explore-btn {
+  background: linear-gradient(45deg, #a81c51, #7a143b);
+  border: none;
+  padding: 16px 40px;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(168, 28, 81, 0.3);
+}
+
+.explore-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(168, 28, 81, 0.5);
+  background: linear-gradient(45deg, #c42360, #a81c51);
+}
+
+@media (max-width: 768px) {
+  .category-title {
+    font-size: 2.5rem;
+  }
+}

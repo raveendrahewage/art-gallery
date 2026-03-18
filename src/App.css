@@ -1,42 +1,38 @@
+.App {
+  text-align: center;
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+}
+
+/* Custom Cursor (DotRing) adjustments if needed */
 .small {
-  width: 6px;
-  height: 6px;
-  border: 2px solid #fff;
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-main);
   border-radius: 50%;
-  z-index: 999;
+  z-index: 1000;
+  pointer-events: none;
 }
+
 .big {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--text-muted);
   border-radius: 50%;
-  margin-bottom: 20rem;
-  animation-name: stretch;
-  animation-duration: 2s;
-  animation-timing-function: ease-out;
-  animation-direction: alternate;
-  animation-iteration-count: infinite;
-  animation-play-state: running;
-  z-index: 999;
+  z-index: 1000;
+  pointer-events: none;
+  transition: width 0.3s, height 0.3s, background-color 0.3s;
 }
 
-.point {
-  width: 200px;
-  height: 200px;
-  background-image: url(assets/paint-brush.svg);
+/* Professional Section Spacing */
+section {
+  padding: 120px 20px;
+  position: relative;
+  z-index: 1;
 }
 
-@keyframes stretch {
-  0% {
-    opacity: 0.2;
-    background-color: green;
-    border-radius: 100%;
-  }
-
-  50% {
-    background-color: orange;
-  }
-
-  100% {
-    background-color: red;
+@media (max-width: 768px) {
+  section {
+    padding: 80px 20px;
   }
 }

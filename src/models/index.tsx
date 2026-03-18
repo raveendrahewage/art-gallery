@@ -58,11 +58,11 @@ type PortfolioProps = {
 };
 
 type NavbarProps = {
-  pageYOffset: number;
+  pageYOffset?: number;
 };
 
 type BannerProps = {
-  pageYOffset: number;
+  pageYOffset?: number;
 };
 
 type ButtonProps = {

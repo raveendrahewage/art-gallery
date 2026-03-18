@@ -6,6 +6,7 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
+import { motion, AnimatePresence } from "framer-motion";
 import { Slide, Photo, PortfolioProps } from "../../models";
 import {
   portfolioPhotos,
@@ -13,6 +14,7 @@ import {
   portfolioSlides,
 } from "../../assets/portfolio";
 import Button from "../button/Button";
+import CategoryDashboard from "./CategoryDashboard";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -26,6 +28,7 @@ const Portfolio = (props: PortfolioProps) => {
   const [index, setIndex] = useState<number>(-1);
   const [displayImageCount, setDisplayeImageCount] = useState<number>(10);
   const [category, setCategory] = useState<string>("all");
+  const [showDashboard, setShowDashboard] = useState<boolean>(false);
   const [slides, setSlides] = useState<Slide[]>(portfolioSlides);
   const [filteredPhotos, setFilteredPhotos] =
     useState<Photo[]>(portfolioPhotos);
@@ -44,14 +47,16 @@ const Portfolio = (props: PortfolioProps) => {
         description: "Vicko Mozara\n\nVeliki zali, Dubravica" + index,
       }));
 
-    setFilteredPhotos(
-      category === "all" ? portfolioPhotos : getCategoryPhotos(category)
-    );
-    setSlides(
-      category === "all"
-        ? getSlides(portfolioPhotos)
-        : getSlides(getCategoryPhotos(category))
-    );
+    const photos = category === "all" ? portfolioPhotos : getCategoryPhotos(category);
+    setFilteredPhotos(photos);
+    setSlides(getSlides(photos));
+    
+    // Show dashboard only for specific categories, not for "all"
+    if (category !== "all") {
+      setShowDashboard(true);
+    } else {
+      setShowDashboard(false);
+    }
   }, [category]);
 
   const layoutChange = (viewPortSize: number = window.innerWidth) => {
@@ -70,49 +75,41 @@ const Portfolio = (props: PortfolioProps) => {
   const renderPhoto = useCallback(
     ({
       layout: { index, ...layout },
-      imageProps: { alt, style, src, ...rest },
-    }: RenderPhotoProps) => (
-      <div
+      imageProps: { alt, style, src, onClick, ...rest },
+    }: RenderPhotoProps<Photo>) => (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
         className="frame"
         style={{
           display: index < displayImageCount ? "block" : "none",
         }}
       >
         <div className="inner-frame">
-          <div className="border">
+          <div className="border" onClick={onClick}>
             <img
               alt={alt}
+              src={src}
               style={{
                 ...style,
                 marginBottom: 0,
                 maxWidth: "100%",
                 height: "auto",
-                aspectRatio: "unset",
               }}
-              src={src}
               {...rest}
             />
-          </div>
-          <div className="middle" onClick={() => setIndex(index)}>
-            <div className="row">
-              <div className="column1">
-                <svg
-                  className="camera"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                >
-                  <path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z" />
-                </svg>
-                <div className="index">{index + 1}</div>
-              </div>
-              <div className="column2">
-                <div className="photo-title">{slides[index].title}</div>
-                <div className="description">{slides[index].description}</div>
+            <div className="middle">
+              <div className="portfolio-info">
+                 <svg viewBox="0 0 24 24" className="camera-icon" style={{ width: 24, height: 24, marginBottom: 12 }}><path fill="currentColor" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z"/></svg>
+                 <h3 className="photo-title">{slides[index]?.title || "Gallery Piece"}</h3>
+                 <p className="description">VIEW ARTWORK</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     ),
     [displayImageCount, slides]
   );
@@ -120,10 +117,24 @@ const Portfolio = (props: PortfolioProps) => {
   return (
     <div id="portfolio">
       <div className="portfolio">
-        <h1 className="title">PORTFOLIO</h1>
-        <sub>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        </sub>
+        <div className="section-header">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="section-subtitle"
+          >
+            ARTISTIC PERSPECTIVES
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="section-title"
+          >
+            PORTFOLIO
+          </motion.h1>
+        </div>
         <div className="btn-group">
           <div>
             {categories.map((cat: string, index: number) => (
@@ -141,20 +152,59 @@ const Portfolio = (props: PortfolioProps) => {
         </div>
       </div>
       <div className="container">
-        <PhotoAlbum
-          photos={filteredPhotos}
-          layout={layout}
-          columns={columns}
-          spacing={spacing}
-          targetRowHeight={targetRowHeight}
-          renderPhoto={renderPhoto}
-          onClick={({ index }) => setIndex(index)}
-          componentsProps={(containerWidth) => ({
-            imageProps: {
-              loading: (containerWidth || 0) > 600 ? "eager" : "lazy",
-            },
-          })}
-        />
+        <AnimatePresence mode="wait">
+          {showDashboard && category !== "all" ? (
+            <CategoryDashboard
+              key={category}
+              category={category}
+              photoCount={filteredPhotos.length}
+              featuredPhoto={filteredPhotos[0]?.src}
+              onExplore={() => setShowDashboard(false)}
+            />
+          ) : (
+            <motion.div
+              key="gallery"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <PhotoAlbum
+                photos={filteredPhotos}
+                layout={layout}
+                columns={columns}
+                spacing={spacing}
+                targetRowHeight={targetRowHeight}
+                renderPhoto={renderPhoto}
+                onClick={({ index }) => setIndex(index)}
+                componentsProps={(containerWidth) => ({
+                  imageProps: {
+                    loading: (containerWidth || 0) > 600 ? "eager" : "lazy",
+                  },
+                })}
+              />
+              <div className="load-more-btn-container" style={{ marginTop: '50px' }}>
+                <Button
+                  buttonText={
+                    displayImageCount === filteredPhotos.length
+                      ? "Show Less"
+                      : "Load More"
+                  }
+                  onClick={() =>
+                    setDisplayeImageCount(
+                      filteredPhotos.length === displayImageCount
+                        ? 10
+                        : displayImageCount + 10 < filteredPhotos.length
+                        ? displayImageCount + 10
+                        : filteredPhotos.length
+                    )
+                  }
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <Lightbox
           slides={slides}
           open={index >= 0}
@@ -162,27 +212,10 @@ const Portfolio = (props: PortfolioProps) => {
           close={() => setIndex(-1)}
           plugins={[Fullscreen, Slideshow, Thumbnails, Zoom, Captions]}
         />
-        <div className="load-more-btn-container">
-          <Button
-            buttonText={
-              displayImageCount === filteredPhotos.length
-                ? "Show Less"
-                : "Load More"
-            }
-            onClick={() =>
-              setDisplayeImageCount(
-                filteredPhotos.length === displayImageCount
-                  ? 10
-                  : displayImageCount + 10 < filteredPhotos.length
-                  ? displayImageCount + 10
-                  : filteredPhotos.length
-              )
-            }
-          />
-        </div>
       </div>
     </div>
   );
 };
 
 export default Portfolio;
+

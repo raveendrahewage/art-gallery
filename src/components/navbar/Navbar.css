@@ -8,11 +8,17 @@
   width: 100%;
   padding: 1.4rem 2rem;
   z-index: 998;
-  transition: background-color 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
 }
 
 .sticky {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
 }
 
 .brand-and-toggler {
@@ -22,9 +28,11 @@
 }
 
 .navbar-brand {
-  color: #fff;
+  color: var(--text-main);
+  font-family: var(--font-header);
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 1.8rem;
+  letter-spacing: 0.2em;
   text-decoration: none;
 }
 

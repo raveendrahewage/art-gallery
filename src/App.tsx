@@ -11,21 +11,14 @@ import Blog from "./components/blog/Blog";
 
 const App = () => {
   const [viewPortSize, setViewPortSize] = useState<number>(window.innerWidth);
-  const [pageYOffset, setPageYOffset] = useState<number>(window.innerWidth);
-  const viewPortChange = () => {
-    setViewPortSize(window.innerWidth);
-  };
-  const pageYOffsetChange = () => {
-    setPageYOffset(window.pageYOffset);
-  };
 
   useEffect(() => {
-    viewPortChange();
-    pageYOffsetChange();
-    window.onscroll = () => pageYOffsetChange();
-    window.onresize = () => viewPortChange();
+    const viewPortChange = () => {
+      setViewPortSize(window.innerWidth);
+    };
+    
+    window.addEventListener("resize", viewPortChange);
     return () => {
-      window.removeEventListener("scroll", pageYOffsetChange);
       window.removeEventListener("resize", viewPortChange);
     };
   }, []);
@@ -34,8 +27,8 @@ const App = () => {
     <div className="App">
       <div id="fb-root"></div>
       <DotRing />
-      <Navbar pageYOffset={pageYOffset} />
-      <Banner pageYOffset={pageYOffset} />
+      <Navbar />
+      <Banner />
       <Portfolio viewPortSize={viewPortSize} />
       <Blog viewPortSize={viewPortSize} />
       <Slideshow />
