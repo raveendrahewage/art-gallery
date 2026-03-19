@@ -58,7 +58,7 @@ const About = (props: AboutProps) => {
     }
 
     return false;
-  }, [STREAMS.length, isMobile, isSpread]);
+  }, [STREAMS.length, isMobile, isSpread, setNavLock]);
 
   useEffect(() => {
   const onWheel = (e: WheelEvent) => {

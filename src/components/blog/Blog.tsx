@@ -59,7 +59,7 @@ const Blog = (props: BlogProps) => {
     }
 
     return false;
-  }, [CHRONICLES.length, isMobile, isSpread]);
+  }, [CHRONICLES.length, isMobile, isSpread, setNavLock]);
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
