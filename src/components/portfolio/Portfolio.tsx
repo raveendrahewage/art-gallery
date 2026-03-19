@@ -62,7 +62,7 @@ const Portfolio = (props: PortfolioProps) => {
         // Delay unlocking to ensure visibility
         setTimeout(() => {
           if (setNavLock) setNavLock(false);
-        }, 1200);
+        }, 700);
         return true; 
       }
       return false;
@@ -89,7 +89,7 @@ const Portfolio = (props: PortfolioProps) => {
         const handled = handleOrbitalScroll(e.deltaY > 0 ? 1 : -1);
         if (handled) {
             isScrolling.current = true;
-            setTimeout(() => { isScrolling.current = false; }, 1000);
+            setTimeout(() => { isScrolling.current = false; }, 800);
         }
     };
 

@@ -20,7 +20,7 @@ const App = () => {
     if (navLock.current && dir > 0) return; // Prevent advancing if locked
     
     const now = Date.now();
-    if (now - lastScrollTime.current < 1200) return;
+    if (now - lastScrollTime.current < 800) return;
     
     lastScrollTime.current = now;
     setActiveSector((prev) => {
@@ -37,10 +37,10 @@ const App = () => {
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < 60) return;
+      if (Math.abs(e.deltaY) < 50) return;
       
       const now = Date.now();
-      if (now - lastScrollTime.current < 1200) return;
+      if (now - lastScrollTime.current < 800) return;
 
       handleSectorChange(e.deltaY > 0 ? 1 : -1);
     };

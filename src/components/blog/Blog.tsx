@@ -42,7 +42,7 @@ const Blog = (props: BlogProps) => {
         setIsSpread(true);
         setTimeout(() => {
           if (setNavLock) setNavLock(false);
-        }, 1200);
+        }, 700);
         return true;
       }
       return false;
@@ -69,7 +69,7 @@ const Blog = (props: BlogProps) => {
         const handled = handleNodeScroll(e.deltaY > 0 ? 1 : -1);
         if (handled) {
             isScrolling.current = true;
-            setTimeout(() => { isScrolling.current = false; }, 1000);
+            setTimeout(() => { isScrolling.current = false; }, 800);
         }
     };
 
