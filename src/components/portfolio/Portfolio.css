@@ -84,7 +84,8 @@
 
 .planet-orbital-item {
   position: absolute;
-  width: 500px;
+  width: 650px;
+  transition: width 0.8s ease;
   cursor: pointer;
 }
 

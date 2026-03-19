@@ -14,10 +14,13 @@ const App = () => {
   const [viewPortSize, setViewPortSize] = useState<number>(window.innerWidth);
   const [activeSector, setActiveSector] = useState(0);
   const lastScrollTime = useRef(0);
+  const navLock = useRef(false);
 
   const handleSectorChange = (dir: number) => {
+    if (navLock.current && dir > 0) return; // Prevent advancing if locked
+    
     const now = Date.now();
-    if (now - lastScrollTime.current < 1000) return; // Debounce for cinematic feel
+    if (now - lastScrollTime.current < 1200) return;
     
     lastScrollTime.current = now;
     setActiveSector((prev) => {
@@ -28,14 +31,16 @@ const App = () => {
     });
   };
 
+  const setNavLock = (val: boolean) => {
+    navLock.current = val;
+  };
+
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      // Ignore small movements
-      if (Math.abs(e.deltaY) < 50) return;
+      if (Math.abs(e.deltaY) < 60) return;
       
-      // Debounce to prevent rapid sector skipping
       const now = Date.now();
-      if (now - lastScrollTime.current < 1000) return;
+      if (now - lastScrollTime.current < 1200) return;
 
       handleSectorChange(e.deltaY > 0 ? 1 : -1);
     };
@@ -133,37 +138,37 @@ const App = () => {
           {activeSector === 1 && (
             <motion.div
               key="sector-1"
-              initial={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.5, filter: "blur(20px)" }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="atmospheric-panel"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.8 }}
+              className="sector-wrapper"
             >
-              <Portfolio viewPortSize={viewPortSize} />
+              <Portfolio viewPortSize={viewPortSize} setNavLock={setNavLock} />
             </motion.div>
           )}
+
           {activeSector === 2 && (
             <motion.div
               key="sector-2"
-              initial={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.5, filter: "blur(20px)" }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="atmospheric-panel"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              className="sector-wrapper"
             >
-              <Blog viewPortSize={viewPortSize} />
+              <Blog viewPortSize={viewPortSize} setNavLock={setNavLock} />
             </motion.div>
           )}
+
           {activeSector === 3 && (
             <motion.div
               key="sector-3"
-              initial={{ opacity: 0, scale: 0.5, filter: "blur(20px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 1.5, filter: "blur(20px)" }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="atmospheric-panel"
+              initial={{ opacity: 0, z: -500 }}
+              animate={{ opacity: 1, z: 0 }}
+              exit={{ opacity: 0, z: 500 }}
+              className="sector-wrapper"
             >
-              <About />
+              <About setNavLock={setNavLock} />
               <Footer />
             </motion.div>
           )}

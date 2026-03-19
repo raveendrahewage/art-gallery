@@ -52,10 +52,16 @@ type BlogSlideshowProps = {
 
 type BlogProps = {
   viewPortSize: number;
+  setNavLock?: (val: boolean) => void;
 };
 
 type PortfolioProps = {
   viewPortSize: number;
+  setNavLock?: (val: boolean) => void;
+};
+
+type AboutProps = {
+  setNavLock?: (val: boolean) => void;
 };
 
 type NavbarProps = {
@@ -84,6 +90,7 @@ export type {
   BlogSlideshowProps,
   BlogProps,
   PortfolioProps,
+  AboutProps,
   NavbarProps,
   BannerProps,
   ButtonProps,

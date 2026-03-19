@@ -100,14 +100,22 @@
   box-shadow: 0 0 10px var(--accent);
 }
 
-/* Floating Section Spacing */
+.sector-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
 section {
-  padding: 60px 20px;
   position: relative;
   z-index: 10;
   background: transparent !important;
   width: 100%;
-  max-width: 1400px;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
