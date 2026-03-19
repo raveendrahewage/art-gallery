@@ -43,6 +43,12 @@
   border: 1px solid rgba(191, 127, 255, 0.2);
   border-radius: 50%;
   animation: orbit-rotate 60s infinite linear;
+  transition: opacity 0.8s ease;
+}
+
+.nebula-spread .nebula-center-profile,
+.nebula-spread .nebula-aura-pulse {
+  opacity: 0;
 }
 
 @keyframes orbit-rotate {
