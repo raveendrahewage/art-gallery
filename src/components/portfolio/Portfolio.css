@@ -1,115 +1,163 @@
-.container {
-  padding: 80px 50px;
-  background-color: var(--bg-dark);
-}
-
-.load-more-btn-container {
-  justify-content: center;
-  align-items: center;
-  display: flex;
+.galactic-orbital-system {
   width: 100%;
-  margin-top: 60px;
-}
-
-.frame {
-  margin-bottom: 20px;
+  height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.frame:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  z-index: 2;
+.orbital-header {
+  padding: 40px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.inner-frame {
-  padding: 0;
-  background-color: transparent;
+.orbital-count {
+  font-size: 0.7rem;
+  letter-spacing: 0.2rem;
+  margin-top: 10px;
+  opacity: 0.6;
 }
 
-.border {
-  overflow: hidden;
-  background-color: #000;
+/* Orbital Selector (Mobile Friendly Scrollable Row) */
+.orbital-selector-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.border img {
-  cursor: none !important;
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
-  display: block;
+.orbital-selector-container::-webkit-scrollbar {
+  display: none;
 }
 
-.frame:hover img {
-  transform: scale(1.1);
-  opacity: 0.5;
+.orbital-selector-track {
+  display: flex;
+  gap: 15px;
+  padding: 0 40px;
 }
 
-.middle {
-  transition: all 0.5s ease;
-  opacity: 0;
-  position: absolute;
-  inset: 0;
+.orbital-btn {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.orbital-btn.active {
+  border-color: var(--accent);
+  background: rgba(191, 127, 255, 0.1);
+  box-shadow: 0 0 20px rgba(191, 127, 255, 0.2);
+}
+
+/* Orbital Stage (3D Area) */
+.orbital-stage {
+  flex: 1;
+  position: relative;
+  perspective: 2000px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
+}
+
+.orbital-stage-center {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet-orbital-item {
+  position: absolute;
+  width: 500px;
+  cursor: pointer;
+}
+
+.planet-sphere-large {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    inset -40px -40px 100px rgba(0,0,0,0.9),
+    0 0 80px rgba(191, 127, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.planet-sphere-large img {
+  width: 140%;
+  height: 140%;
+  object-fit: cover;
+  position: absolute;
+  top: -20%;
+  left: -20%;
+}
+
+.planet-atmosphere-glow {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 40px rgba(191, 127, 255, 0.4);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 60%);
   pointer-events: none;
 }
 
-.frame:hover .middle {
-  opacity: 1;
-  pointer-events: auto;
+.orbital-info {
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  width: 400px;
+  text-align: left;
 }
 
-.photo-title {
-  color: var(--text-main);
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  font-weight: 700;
+.planet-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 10px 0;
   letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-
-.description {
-  color: var(--text-muted);
-  font-size: 0.8rem;
   text-transform: uppercase;
-  font-weight: 400;
 }
 
-.camera {
-  fill: var(--accent);
-  width: 24px;
-  margin-bottom: 15px;
+.planet-action {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
 }
 
-.portfolio {
-  text-align: center;
-  padding: 100px 20px;
-  background-color: var(--bg-dark);
-}
-
-.btn-group {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.div-active {
-  background: linear-gradient(45deg, var(--accent), var(--accent-light)) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: 0 5px 15px rgba(168, 28, 81, 0.4);
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 40px 20px;
+@media (max-width: 768px) {
+  .planet-orbital-item {
+    width: 250px;
+  }
+  .orbital-info {
+    position: relative;
+    left: 0;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  .planet-title {
+    font-size: 1.5rem;
+  }
+  .orbital-stage {
+    align-items: flex-start;
+    padding-top: 100px;
   }
 }

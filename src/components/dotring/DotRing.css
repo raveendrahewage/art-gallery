@@ -1,38 +1,43 @@
-.brush {
+.ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 44px;
-  height: 44px;
-  background-image: url(../../assets/paint-brush.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 2147483647;
+  width: 1px;
+  height: 1px;
   pointer-events: none;
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-  filter: drop-shadow(0 0 8px rgba(168, 28, 81, 0.4));
+  z-index: 2147483647;
 }
 
-.plate {
-  position: fixed;
-  top: 0;
-  left: 0;
+.ring-circle {
+  position: absolute;
+  top: -16px;
+  left: -16px;
   width: 32px;
   height: 32px;
-  background-image: url(../../assets/paint-plate.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 2147483646;
-  pointer-events: none;
-  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-  mix-blend-mode: hard-light;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(191, 127, 255, 0.3);
+  transition: transform 0.2s ease-out, border-color 0.3s ease;
 }
 
-body:has(a:hover, button:hover, .border:hover) .brush {
-    transform: scale(1.4) translate(-10%, -10%);
+.dot {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-light);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-light);
+  transition: transform 0.1s ease-out;
 }
 
-body:has(a:hover, button:hover, .border:hover) .plate {
-    transform: scale(0.8) translate(10%, 10%);
-    opacity: 0.7;
+body:has(a:hover, button:hover, .border:hover) .ring-circle {
+  transform: scale(1.5);
+  border-color: var(--accent-warm);
+  background: rgba(255, 126, 182, 0.05);
+}
+
+body:has(a:hover, button:hover, .border:hover) .dot {
+  transform: scale(0.5);
 }

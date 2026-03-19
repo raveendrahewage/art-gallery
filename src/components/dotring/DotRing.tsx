@@ -7,16 +7,15 @@ const DotRing = () => {
 
   // Use transform for better performance and smoother tracking
   return (
-    <>
+    <div className="custom-cursor">
       <div 
         style={{ transform: `translate(${x}px, ${y}px)` }} 
-        className="plate"
-      ></div>
-      <div 
-        className="brush" 
-        style={{ transform: `translate(${x}px, ${y}px)` }}
-      ></div>
-    </>
+        className="ring"
+      >
+        <div className="ring-circle"></div>
+        <div className="dot"></div>
+      </div>
+    </div>
   );
 };
 

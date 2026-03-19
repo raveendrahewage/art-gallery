@@ -1,102 +1,113 @@
-.section-header {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.section-subtitle {
-  font-size: 0.8rem;
-  letter-spacing: 0.4em;
-  color: var(--accent);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.section-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--text-main);
-  text-transform: uppercase;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-
-.about-image-wrapper {
+.about-orbital-section {
+  width: 100%;
+  height: 100%;
   position: relative;
-  aspect-ratio: 4/5;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.about-image {
+.nebula-stage {
+  flex: 1;
+  position: relative;
+  perspective: 2500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nebula-center-profile {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.nebula-avatar-main {
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+.avatar-orb {
   width: 100%;
   height: 100%;
-  background-image: url(../../assets/ashu/ashu-about1.jpg);
-  background-size: cover;
-  background-position: center;
-  transition: transform 1s ease;
+  background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+  border-radius: 50%;
 }
 
-.about-image-wrapper:hover .about-image {
-  transform: scale(1.05);
-}
-
-.image-overlay {
+.nebula-aura-pulse {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--bg-dark), transparent);
-  opacity: 0.4;
+  inset: -20px;
+  border: 1px solid rgba(191, 127, 255, 0.2);
+  border-radius: 50%;
+  animation: orbit-rotate 60s infinite linear;
 }
 
-.about-content {
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.stream-container {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 40px;
-  text-align: left;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
-.content-block h3 {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  color: var(--text-main);
-  letter-spacing: 0.1em;
-  position: relative;
-  display: inline-block;
-}
-
-.content-block h3::after {
-  content: '';
+.nebula-panel-orbital {
   position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 30px;
+  width: 600px;
+  background: rgba(2, 4, 10, 0.6);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid var(--accent);
+}
+
+.panel-stream-id {
+  font-size: 0.75rem;
+  color: var(--accent-light);
+  letter-spacing: 0.4em;
+  margin-bottom: 20px;
+}
+
+.panel-divider {
+  width: 40px;
   height: 2px;
   background: var(--accent);
+  margin-bottom: 25px;
 }
 
-.content-block p {
+.panel-content {
   font-size: 1.1rem;
   line-height: 1.8;
+  color: var(--text-main);
+  font-weight: 300;
 }
 
-@media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+@media (max-width: 768px) {
+  .nebula-panel-orbital {
+    width: 85%;
+    padding: 25px;
   }
-  
-  .about-content {
-    text-align: center;
+  .panel-content {
+    font-size: 0.9rem;
   }
-  
-  .content-block h3::after {
-    left: 50%;
-    transform: translateX(-50%);
+  .nebula-stage {
+    align-items: center;
+    padding-top: 0;
+  }
+  .nebula-avatar-main {
+    width: 300px;
+    height: 300px;
   }
 }

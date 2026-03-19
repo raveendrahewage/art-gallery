@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-dark: #0a0a0a;
-  --bg-card: rgba(18, 18, 18, 0.7);
+  --bg-dark: #02040a;
+  --bg-card: rgba(5, 7, 15, 0.8);
   --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --accent: #a81c51;
-  --accent-light: #c42360;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --accent: #bf7fff; /* Nebula Purple */
+  --accent-light: #5ec7ff; /* Star Blue */
+  --accent-warm: #ff7eb6; /* Stellar Pink */
   --glass: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.1);
+  --border: rgba(191, 127, 255, 0.3);
   --font-header: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
 * {
@@ -32,18 +34,130 @@ body {
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Cosmic Layers */
+.cosmic-bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, #050b1a 0%, #02040a 100%);
+  transition: transform 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nebula {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(191, 127, 255, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(94, 199, 255, 0.1) 0%, transparent 40%);
+  filter: blur(80px);
+  animation: nebula-pulse 10s infinite alternate ease-in-out;
+}
+
+@keyframes nebula-pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.stars-1, .stars-2, .stars-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200%;
+  height: 200%;
+  background-repeat: repeat;
+}
+
+.stars-1 {
+  background-image: 
+    radial-gradient(1px 1px at 25% 25%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 50% 50%, #fff 100%, transparent),
+    radial-gradient(1px 1px at 75% 75%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 15% 85%, #fff 100%, transparent);
+  background-size: 300px 300px;
+  opacity: 0.2;
+}
+
+.stars-2 {
+  background-image: 
+    radial-gradient(2px 2px at 10% 10%, #fff 100%, transparent),
+    radial-gradient(2px 2px at 40% 60%, var(--accent-light) 100%, transparent),
+    radial-gradient(2px 2px at 90% 30%, #fff 100%, transparent);
+  background-size: 450px 450px;
+  opacity: 0.3;
+}
+
+.stars-3 {
+  background-image: 
+    radial-gradient(3px 3px at 20% 40%, var(--accent) 100%, transparent),
+    radial-gradient(3px 3px at 70% 80%, var(--accent-warm) 100%, transparent);
+  background-size: 600px 600px;
+  opacity: 0.15;
+  filter: blur(1px);
+}
+
+.nebula {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(191, 127, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(94, 199, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 126, 182, 0.05) 0%, transparent 50%);
+  filter: blur(80px);
+  animation: nebula-drift 60s ease-in-out infinite alternate;
+}
+
+@keyframes nebula-drift {
+  from { transform: scale(1) translate(0, 0); }
+  to { transform: scale(1.2) translate(-5%, -5%); }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+  opacity: 0;
+  animation: shooting-star 10s linear infinite;
+}
+
+@keyframes shooting-star {
+  0% { transform: translate(100vw, 0) rotate(-45deg); opacity: 0; }
+  5% { opacity: 1; }
+  15% { transform: translate(50vw, 50vh) rotate(-45deg); opacity: 0; }
+  100% { transform: translate(50vw, 50vh) rotate(-45deg); opacity: 0; }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-header);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-light) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(191, 127, 255, 0.2));
 }
 
 p {
-  line-height: 1.6;
+  line-height: 1.8;
   color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 /* Custom Scrollbar */

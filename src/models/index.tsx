@@ -31,6 +31,7 @@ type Photo = {
   width: number;
   height: number;
   category: string;
+  alt?: string;
   // images: Image[];
 };
 

@@ -23,7 +23,13 @@
 .slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  background: linear-gradient(
+    to top, 
+    rgba(2, 4, 10, 0.6) 0%, 
+    transparent 40%, 
+    rgba(191, 127, 255, 0.05) 100%
+  );
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
 }
 
 .slide-indicators {

@@ -1,38 +1,125 @@
 .App {
   text-align: center;
-  background-color: var(--bg-dark);
+  background: transparent;
   min-height: 100vh;
 }
 
-/* Custom Cursor (DotRing) adjustments if needed */
+.galactic-navigator {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-deck {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+.atmospheric-panel {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: center;
+  padding: 80px 20px;
+  background: transparent !important;
+}
+
+/* Hide scrollbar for atmospheric panels */
+.atmospheric-panel::-webkit-scrollbar {
+  display: none;
+}
+.atmospheric-panel {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Cursor (DotRing) adjustments */
 .small {
-  width: 8px;
-  height: 8px;
-  background-color: var(--text-main);
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-light);
   border-radius: 50%;
-  z-index: 1000;
+  z-index: 10000;
   pointer-events: none;
+  box-shadow: 0 0 10px var(--accent-light);
 }
 
 .big {
   width: 40px;
   height: 40px;
-  border: 1px solid var(--text-muted);
+  border: 1px solid var(--accent);
   border-radius: 50%;
-  z-index: 1000;
+  z-index: 10000;
   pointer-events: none;
   transition: width 0.3s, height 0.3s, background-color 0.3s;
+  box-shadow: 0 0 15px rgba(191, 127, 255, 0.2);
 }
 
-/* Professional Section Spacing */
+.galactic-hud {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.sector-indicator {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+}
+
+.sector-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.sector-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sector-dots .dot.active {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.5);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Floating Section Spacing */
 section {
-  padding: 120px 20px;
+  padding: 60px 20px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  background: transparent !important;
+  width: 100%;
+  max-width: 1400px;
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 80px 20px;
+    padding: 80px 15px;
   }
+  .atmospheric-panel {
+    padding: 60px 10px;
+  }
+}
+
+/* Optimize Performance */
+.cosmic-bg, .galactic-core, .planet-sphere, .data-particle {
+  will-change: transform, opacity;
 }
