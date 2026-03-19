@@ -11,7 +11,6 @@ import {
   nostalagicPhotos,
   pencilPhotos,
 } from "../../assets/portfolio";
-import Button from "../button/Button";
 import "./Blog.css";
 
 const Blog = (props: BlogProps) => {
@@ -69,7 +68,7 @@ const Blog = (props: BlogProps) => {
       <div className="orbital-header">
         <div className="section-header">
           <motion.span className="section-subtitle mono-text">
-            SIGNAL_LOGS // CHRONICLES
+            SIGNAL_LOGS {"//"} CHRONICLES
           </motion.span>
           <div className="orbital-count mono-text">
             NODES_DETECTED: <span className="accent-text">{CHRONICLES.length}</span> | 

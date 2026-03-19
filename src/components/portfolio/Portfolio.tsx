@@ -1,20 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { PhotoAlbum, RenderPhotoProps, LayoutType } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Captions from "yet-another-react-lightbox/plugins/captions";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Slide, Photo, PortfolioProps } from "../../models";
 import {
   portfolioPhotos,
   categories,
   portfolioSlides,
 } from "../../assets/portfolio";
-import Button from "../button/Button";
-import CategoryDashboard from "./CategoryDashboard";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
@@ -116,9 +113,9 @@ const Portfolio = (props: PortfolioProps) => {
             animate={{ opacity: 1, y: 0 }}
             className="orbital-info"
           >
-            <div className="mono-text accent-text">PLANET_{idx} // {photo.category.toUpperCase()}</div>
+            <div className="mono-text accent-text">PLANET_{idx} {"//"} {photo.category.toUpperCase()}</div>
             <h2 className="planet-title">{slides[idx]?.title}</h2>
-            <div className="planet-action">ENGAGE_SENSOR_ARRAY —</div>
+            <div className="planet-action">ENGAGE_SENSOR_ARRAY {"—"}</div>
           </motion.div>
         )}
       </motion.div>

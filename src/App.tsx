@@ -6,7 +6,6 @@ import Portfolio from "./components/portfolio/Portfolio";
 import Banner from "./components/banner/Banner";
 import About from "./components/about/About";
 import Footer from "./components/footer/Footer";
-import Slideshow from "./components/slideshow/Slideshow";
 import Blog from "./components/blog/Blog";
 
 const SECTORS = ["HERO", "ARCHIVES", "CHRONICLES", "NEBULA_CORE"];
@@ -14,7 +13,6 @@ const SECTORS = ["HERO", "ARCHIVES", "CHRONICLES", "NEBULA_CORE"];
 const App = () => {
   const [viewPortSize, setViewPortSize] = useState<number>(window.innerWidth);
   const [activeSector, setActiveSector] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const lastScrollTime = useRef(0);
 
   const handleSectorChange = (dir: number) => {

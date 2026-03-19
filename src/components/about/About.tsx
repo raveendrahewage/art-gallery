@@ -91,7 +91,7 @@ const About = () => {
       <div className="orbital-header">
         <div className="section-header">
           <motion.span className="section-subtitle mono-text">
-            NEBULA_SOURCE // DATA_STREAM
+            NEBULA_SOURCE {"//"} DATA_STREAM
           </motion.span>
           <div className="orbital-count mono-text">
             STREAMS_ACTIVE: <span className="accent-text">{STREAMS.length}</span> | 
@@ -136,7 +136,7 @@ const About = () => {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         className="nebula-panel-orbital"
                     >
-                        <div className="panel-stream-id mono-text">{item.id} // {item.label}</div>
+                        <div className="panel-stream-id mono-text">{item.id} {"//"} {item.label}</div>
                         <div className="panel-divider"></div>
                         <p className="panel-content">{item.content}</p>
                     </motion.div>
