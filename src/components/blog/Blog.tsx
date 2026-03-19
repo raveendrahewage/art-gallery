@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import BlogArticle from "../blog-article/BlogArticle";
 import { BlogProps } from "../../models";
@@ -15,6 +15,7 @@ import "./Blog.css";
 
 const Blog = (props: BlogProps) => {
   const [activeNode, setActiveNode] = useState(0);
+  const isScrolling = useRef(false);
 
   const CHRONICLES = [
     { photos: bookmarkPhotos, title: "BOOKMARK_PROTOCOL" },
@@ -36,10 +37,17 @@ const Blog = (props: BlogProps) => {
   }, [CHRONICLES.length]);
 
   useEffect(() => {
-    const onWheel = (e: WheelEvent) => {
-        if (Math.abs(e.deltaY) < 30) return;
-        handleNodeScroll(e.deltaY > 0 ? 1 : -1);
-    };
+  const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) < 30) return;
+      if (isScrolling.current) return;
+      
+      isScrolling.current = true;
+      handleNodeScroll(e.deltaY > 0 ? 1 : -1);
+
+      setTimeout(() => {
+          isScrolling.current = false;
+      }, 1200);
+  };
 
     let touchStart = 0;
     const onTouchStart = (e: TouchEvent) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
@@ -23,6 +23,7 @@ const Portfolio = (props: PortfolioProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slides, setSlides] = useState<Slide[]>(portfolioSlides);
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>(portfolioPhotos);
+  const isScrolling = useRef(false);
 
   useEffect(() => {
     const getCategoryPhotos = (category: string): Photo[] =>
@@ -55,8 +56,15 @@ const Portfolio = (props: PortfolioProps) => {
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-        if (Math.abs(e.deltaY) < 30) return;
+        if (Math.abs(e.deltaY) < 50) return;
+        if (isScrolling.current) return;
+        
+        isScrolling.current = true;
         handleOrbitalScroll(e.deltaY > 0 ? 1 : -1);
+
+        setTimeout(() => {
+            isScrolling.current = false;
+        }, 1200);
     };
 
     let touchStart = 0;

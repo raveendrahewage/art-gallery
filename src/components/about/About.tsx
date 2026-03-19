@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import "./About.css";
 
 const About = () => {
   const [activeStream, setActiveStream] = useState(0);
+  const isScrolling = useRef(false);
   const particles = Array.from({ length: 15 });
 
   const STREAMS = [
@@ -34,10 +35,17 @@ const About = () => {
   }, [STREAMS.length]);
 
   useEffect(() => {
-    const onWheel = (e: WheelEvent) => {
-        if (Math.abs(e.deltaY) < 30) return;
-        handleStreamScroll(e.deltaY > 0 ? 1 : -1);
-    };
+  const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) < 30) return;
+      if (isScrolling.current) return;
+      
+      isScrolling.current = true;
+      handleStreamScroll(e.deltaY > 0 ? 1 : -1);
+
+      setTimeout(() => {
+          isScrolling.current = false;
+      }, 1200);
+  };
 
     let touchStart = 0;
     const onTouchStart = (e: TouchEvent) => {
