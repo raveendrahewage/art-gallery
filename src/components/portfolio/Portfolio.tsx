@@ -18,6 +18,7 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "./Portfolio.css";
 
 const Portfolio = (props: PortfolioProps) => {
+  const { setNavLock } = props;
   const [index, setIndex] = useState<number>(-1);
   const [category, setCategory] = useState<string>("all");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -60,7 +61,7 @@ const Portfolio = (props: PortfolioProps) => {
         setIsSpread(true);
         // Delay unlocking to ensure visibility
         setTimeout(() => {
-          if (props.setNavLock) props.setNavLock(false);
+          if (setNavLock) setNavLock(false);
         }, 1200);
         return true; 
       }
@@ -78,7 +79,7 @@ const Portfolio = (props: PortfolioProps) => {
     }
 
     return false; // Let global handle if already spread or moving up
-  }, [filteredPhotos.length, isMobile, isSpread]);
+  }, [filteredPhotos.length, isMobile, isSpread, setNavLock]);
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {

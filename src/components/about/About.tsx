@@ -4,6 +4,7 @@ import { AboutProps } from "../../models";
 import "./About.css";
 
 const About = (props: AboutProps) => {
+  const { setNavLock } = props;
   const [activeStream, setActiveStream] = useState(0);
   const [isSpread, setIsSpread] = useState(false);
   const isScrolling = useRef(false);
@@ -11,10 +12,10 @@ const About = (props: AboutProps) => {
   const isMobile = window.innerWidth < 768;
 
   useEffect(() => {
-    if (!isMobile && !isSpread && props.setNavLock) {
-        props.setNavLock(true);
+    if (!isMobile && !isSpread && setNavLock) {
+        setNavLock(true);
     }
-  }, [isMobile, isSpread, props]);
+  }, [isMobile, isSpread, setNavLock]);
 
   const STREAMS = [
     {
@@ -39,7 +40,7 @@ const About = (props: AboutProps) => {
       if (dir > 0) {
         setIsSpread(true);
         setTimeout(() => {
-          if (props.setNavLock) props.setNavLock(false);
+          if (setNavLock) setNavLock(false);
         }, 1200);
         return true;
       }

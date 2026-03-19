@@ -14,10 +14,10 @@ import {
 import "./Blog.css";
 
 const Blog = (props: BlogProps) => {
+  const { setNavLock } = props;
   const [activeNode, setActiveNode] = useState(0);
   const [isSpread, setIsSpread] = useState(false);
   const isScrolling = useRef(false);
-  const lastScrollTime = useRef(0);
   const isMobile = props.viewPortSize < 768;
 
   const CHRONICLES = [
@@ -31,17 +31,17 @@ const Blog = (props: BlogProps) => {
   ];
 
   useEffect(() => {
-    if (!isMobile && !isSpread && props.setNavLock) {
-        props.setNavLock(true);
+    if (!isMobile && !isSpread && setNavLock) {
+        setNavLock(true);
     }
-  }, [isMobile, isSpread, props]);
+  }, [isMobile, isSpread, setNavLock]);
 
   const handleNodeScroll = useCallback((dir: number) => {
     if (!isMobile && !isSpread) {
       if (dir > 0) {
         setIsSpread(true);
         setTimeout(() => {
-          if (props.setNavLock) props.setNavLock(false);
+          if (setNavLock) setNavLock(false);
         }, 1200);
         return true;
       }
